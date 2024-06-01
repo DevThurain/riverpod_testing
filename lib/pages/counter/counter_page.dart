@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/**
+ * State Notifier
+ * State Notifier Provider
+ */
 class Counter extends StateNotifier<int?> {
   Counter() : super(null);
   void increment() => state = (state ?? 0) + 1;
