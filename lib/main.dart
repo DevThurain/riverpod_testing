@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_testing/pages/counter/counter_page.dart';
+import 'package:riverpod_testing/pages/person/person_page.dart';
 import 'package:riverpod_testing/pages/ticker/ticker_page.dart';
 import 'package:riverpod_testing/pages/weather/weather_page.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TickerPage(),
+      home: const PersonPage(),
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
             settings: routeSettings,
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
 
                 case TickerPage.routeName:
                   return const TickerPage();
+
+                case PersonPage.routeName:
+                  return const PersonPage();
 
                 default:
                   return const CounterPage();
