@@ -68,15 +68,14 @@ class PersonPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var data = ref.watch(personProvider);
-    debugPrint(data._personList.toString());
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Person'),
       ),
       body: Consumer(
         builder: ((context, ref, child) {
+          var data = ref.watch(personProvider);
+          debugPrint(data._personList.toString());
           return ListView.builder(
               itemCount: data.itemLength,
               itemBuilder: (context, index) {
@@ -99,7 +98,7 @@ class PersonPage extends ConsumerWidget {
           var newPerson = await createOrUpdatePerson(context: context);
           debugPrint(newPerson.toString());
           if (newPerson != null) {
-            data.add(newPerson);
+            ref.read(personProvider).add(newPerson);
           }
         },
       ),
