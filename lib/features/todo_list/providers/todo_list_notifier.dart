@@ -34,5 +34,4 @@ class TodoListNotifier extends _$TodoListNotifier {
   }
 }
 
-final addTodoMutation = Mutation<void>();
-final removeTodoMutation = Mutation<void>();
+final fetchTodoMutation = Mutation<void>();

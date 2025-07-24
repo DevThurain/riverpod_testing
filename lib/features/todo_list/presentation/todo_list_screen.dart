@@ -11,12 +11,11 @@ class TodoListScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todoListAsync = ref.watch(todoListNotifierProvider);
-    final addTodo = ref.watch(addTodoMutation);
-    final removeTodo = ref.watch(removeTodoMutation);
+    final fetchTodo = ref.watch(fetchTodoMutation);
 
     return Scaffold(
       floatingActionButton: SizedBox(
-        child: switch (removeTodo) {
+        child: switch (fetchTodo) {
           MutationIdle<void>() => AddTodoButton(),
           MutationPending<void>() => SizedBox(),
           MutationError<void>() => AddTodoButton(),
@@ -38,7 +37,7 @@ class TodoListScreen extends HookConsumerWidget {
                           title: Text('Title $index'),
                           subtitle: Text(todoList[index].description),
                           onTap: () {
-                            removeTodoMutation.run(ref, (ref) async {
+                            fetchTodoMutation.run(ref, (ref) async {
                               await ref.get(todoListNotifierProvider.notifier).removeTodo(todoList[index].id);
                             });
                           },
@@ -62,9 +61,11 @@ class AddTodoButton extends ConsumerWidget {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        addTodoMutation.run(ref, (ref) async {
+        fetchTodoMutation.run(ref, (ref) async {
           final uuid = UuidV4().generate();
-          ref.get(todoListNotifierProvider.notifier).addTodo(TodoEntity(id: uuid, description: uuid, completed: false));
+          await ref
+              .get(todoListNotifierProvider.notifier)
+              .addTodo(TodoEntity(id: uuid, description: uuid, completed: false));
         });
       },
     );
