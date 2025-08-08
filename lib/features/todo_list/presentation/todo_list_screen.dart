@@ -22,31 +22,33 @@ class TodoListScreen extends HookConsumerWidget {
           MutationSuccess<void>() => AddTodoButton(),
         },
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            todoListAsync.when(
-              loading: () => Expanded(child: Center(child: CircularProgressIndicator())),
-              error: (error, stackTrace) => SizedBox(),
-              data: (todoList) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: todoList.length,
-                    itemBuilder:
-                        (context, index) => ListTile(
-                          title: Text('Title $index'),
-                          subtitle: Text(todoList[index].description),
-                          onTap: () {
-                            fetchTodoMutation.run(ref, (ref) async {
-                              await ref.get(todoListNotifierProvider.notifier).removeTodo(todoList[index].id);
-                            });
-                          },
-                        ),
-                  ),
-                );
-              },
-            ),
-          ],
+      body: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              todoListAsync.when(
+                loading: () => Expanded(child: Center(child: CircularProgressIndicator())),
+                error: (error, stackTrace) => SizedBox(),
+                data: (todoList) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: todoList.length,
+                      itemBuilder:
+                          (context, index) => ListTile(
+                            title: Text('Title $index'),
+                            subtitle: Text(todoList[index].description),
+                            onTap: () {
+                              fetchTodoMutation.run(ref, (ref) async {
+                                await ref.get(todoListNotifierProvider.notifier).removeTodo(todoList[index].id);
+                              });
+                            },
+                          ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

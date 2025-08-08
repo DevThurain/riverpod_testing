@@ -6,7 +6,7 @@ import 'package:riverpod_testing/core/router/screen_exports.dart';
 // GoRouter configuration
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final router = GoRouter(
-  initialLocation: AppRoutes.todo_list_screen,
+  initialLocation: AppRoutes.playground_screen,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   observers: [
@@ -20,5 +20,12 @@ final router = GoRouter(
       pageBuilder: (context, state) => CupertinoPage(child: TodoListScreen()),
     ),
 
+    GoRoute(
+      path: AppRoutes.playground_screen,
+      name: AppRoutes.playground_screen,
+      pageBuilder: (context, state) => CupertinoPage(child: PlaygroundScreen()),
+    ),
+
   ],
 );
+

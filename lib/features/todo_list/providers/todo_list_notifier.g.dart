@@ -31,7 +31,7 @@ final class TodoListNotifierProvider
   TodoListNotifier create() => TodoListNotifier();
 }
 
-String _$todoListNotifierHash() => r'92f02176c03e15a528c94b975cbb50d2080b25eb';
+String _$todoListNotifierHash() => r'57965d5c0dc56b4939a9a133e405ef8b6395a031';
 
 abstract class _$TodoListNotifierBase extends $AsyncNotifier<List<TodoEntity>> {
   FutureOr<List<TodoEntity>> build();
