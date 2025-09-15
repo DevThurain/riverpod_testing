@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/experimental/mutation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_testing/data/entities/todo_entity.dart';
+import 'package:riverpod_testing/domain/entities/todo_entity.dart';
 import 'package:riverpod_testing/features/todo_list/providers/todo_list_notifier.dart';
 import 'package:uuid/v4.dart';
 
@@ -10,7 +10,7 @@ class TodoListScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoListAsync = ref.watch(todoListNotifierProvider);
+    final todoListAsync = ref.watch(todoListProvider);
     final fetchTodo = ref.watch(fetchTodoMutation);
 
     return Scaffold(
@@ -39,7 +39,7 @@ class TodoListScreen extends HookConsumerWidget {
                             subtitle: Text(todoList[index].description),
                             onTap: () {
                               fetchTodoMutation.run(ref, (ref) async {
-                                await ref.get(todoListNotifierProvider.notifier).removeTodo(todoList[index].id);
+                                await ref.get(todoListProvider.notifier).removeTodo(todoList[index].id);
                               });
                             },
                           ),
@@ -66,7 +66,7 @@ class AddTodoButton extends ConsumerWidget {
         fetchTodoMutation.run(ref, (ref) async {
           final uuid = UuidV4().generate();
           await ref
-              .get(todoListNotifierProvider.notifier)
+              .get(todoListProvider.notifier)
               .addTodo(TodoEntity(id: uuid, description: uuid, completed: false));
         });
       },

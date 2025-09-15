@@ -19,13 +19,6 @@ final router = GoRouter(
       name: AppRoutes.todo_list_screen,
       pageBuilder: (context, state) => CupertinoPage(child: TodoListScreen()),
     ),
-
-    GoRoute(
-      path: AppRoutes.playground_screen,
-      name: AppRoutes.playground_screen,
-      pageBuilder: (context, state) => CupertinoPage(child: PlaygroundScreen()),
-    ),
-
   ],
 );
 

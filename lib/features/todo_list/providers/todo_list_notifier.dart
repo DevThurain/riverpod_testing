@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/experimental/mutation.dart';
 import 'package:riverpod_annotation/experimental/json_persist.dart';
 import 'package:riverpod_annotation/experimental/persist.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:riverpod_testing/data/entities/todo_entity.dart';
+import 'package:riverpod_testing/domain/entities/todo_entity.dart';
 import 'package:riverpod_testing/features/todo_list/providers/storage_provider.dart';
 
 part 'todo_list_notifier.g.dart';
@@ -15,6 +15,7 @@ class TodoListNotifier extends _$TodoListNotifier {
     persist(ref.watch(storageProvider.future));
     return [];
   }
+  
 
   Future<void> addTodo(TodoEntity todo) async {
     state = AsyncLoading();
